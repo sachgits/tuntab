@@ -7,27 +7,26 @@
  *  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-// Model types
-class User {}
-class Widget {}
+import {User} from './userSchema';
+import * as bcryp from 'bcrypt';
+import {join,normalize} from 'path';
+import {mkdirSync} from 'fs';
 
-// Mock data
-var viewer = new User();
-viewer.id = '1';
-viewer.name = 'Anonymous';
-var widgets = ['What\'s-it', 'Who\'s-it', 'How\'s-it'].map((name, i) => {
-  var widget = new Widget();
-  widget.name = name;
-  widget.id = `${i}`;
-  return widget;
-});
+user = new User();
 
-module.exports = {
-  // Export methods that your schema can use to interact with your database
-  getUser: (id) => id === viewer.id ? viewer : null,
-  getViewer: () => viewer,
-  getWidget: (id) => widgets.find(w => w.id === id),
-  getWidgets: () => widgets,
-  User,
-  Widget,
-};
+
+export function createUser(age,username,email,password,gender,fname,lname){
+    var photo_album = join(process.cwd(),'profile',username);
+    var name = {firstname:fname,lastname:lname};
+    var salt = bcryp.genSaltSync(10);
+    var hashedPass = bcryp.hashSync(password,salt);
+
+    var user = new User({age:age,username:username,email:email,password:hashedPass,gender:gender,photoAlbum:photo_album,
+        name:name});
+    user.save(function(err,newUser){
+        if(err){
+            return console.error(err);
+        }
+        console.log(newUser);
+    });
+}
