@@ -7,7 +7,7 @@
  *  of patent rights can be found in the PATENTS file in the same directory.
  */
 
-import {User} from './userSchema';
+import {User} from './Models/User/userSchema';
 import * as bcryp from 'bcrypt';
 import {join,normalize} from 'path';
 import {mkdirSync} from 'fs';

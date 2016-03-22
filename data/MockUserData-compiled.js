@@ -1,6 +1,6 @@
 'use strict';
 
-var _userSchema = require('./userSchema');
+var _userSchema = require('./Models/User/userSchema');
 
 var _faker = require('faker');
 

@@ -6,7 +6,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 
 var _dbConfig = require('./dbConfig');
 
-var _userSchema = require('./userSchema');
+var _userSchema = require('./Models/User/userSchema');
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 

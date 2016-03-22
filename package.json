@@ -2,11 +2,12 @@
   "name": "relay-starter-kit",
   "private": true,
   "description": "Tuntab Bidding App",
-  "repository": "facebook/relay-starter-kit",
+  "repository": "sachgits/tuntab4",
   "version": "0.1.0",
   "scripts": {
     "start": "babel-node ./server.js",
-    "update-schema": "babel-node ./scripts/updateSchema.js"
+    "update-schema": "babel-node ./scripts/updateSchema.js",
+    "compile": "babel  -w data ./data  --out-dir . *-compiled.js"
   },
   "dependencies": {
     "babel-core": ">=6.5.2",

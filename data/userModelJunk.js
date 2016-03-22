@@ -2,7 +2,7 @@
  * Created by sachg on 2/22/2016.
  */
 import {mongoose} from './dbConfig';
-import {User} from './userSchema';
+import {User} from './Models/User/userSchema';
 
 
 class userModel {

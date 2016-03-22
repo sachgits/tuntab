@@ -2,7 +2,7 @@
  * Created by sachg on 2/25/2016.
  */
 
-import {User} from './userSchema';
+import {User} from './Models/User/userSchema';
 import {Faker} from 'faker';
 
 
