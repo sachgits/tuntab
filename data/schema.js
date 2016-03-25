@@ -59,12 +59,6 @@ var queryType = new GraphQLObjectType({
           }
       },
       // Add your own root fields here
-      Users: {
-          type: GraphQLList(UserType),
-          resolve(){
-              return User.getListOfUsers();
-          }
-      },
       node: nodeField
   })
   });
