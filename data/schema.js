@@ -142,23 +142,22 @@ var queryType = new GraphQLObjectType({
   name: 'Query',
   fields: () => ({
 
-    User: {
-      type: UserType,
-      resolve: ()=>{
-        var results = User.getUserById('Alize76');
-          return results;
-      }
-    },
-
-  }),
-    // Add your own root fields here
-    Users: {
-      type: GraphQLList(UserType),
-      resolve(){
-          return Users.getListOfUsers();
-      }
-    },
-    node: nodeField
+      User: {
+          type: UserType,
+          resolve: ()=> {
+              var results = User.getUserById('Alize76');
+              return results;
+          }
+      },
+      // Add your own root fields here
+      Users: {
+          type: GraphQLList(UserType),
+          resolve(){
+              return Users.getListOfUsers();
+          }
+      },
+      node: nodeField
+  })
   });
 
 
