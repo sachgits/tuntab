@@ -32,6 +32,8 @@ import {
 
 import mongoose from 'mongoose';
 
+import {nodeField } from './nodes';
+
 import User from './Models/User/userSchema';
 //more imports comming
 
@@ -143,21 +145,21 @@ var queryType = new GraphQLObjectType({
     User: {
       type: UserType,
       resolve: ()=>{
-        var results = User.getUserById('User', 'Alize76');
+        var results = User.getUserById('Alize76');
           return results;
       }
     },
   }),
-
-    node: nodeField,
     // Add your own root fields here
     Users: {
       type: GraphQLList(UserType),
       resolve(){
           return Users.getListOfUsers();
       }
-    }
+    },
+  node: nodeField
   });
+
 
 /**
  * This is the type that will be the root of our mutations,

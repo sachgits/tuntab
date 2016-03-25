@@ -15,26 +15,21 @@ GraphQLObjectType
 } from 'graphql'
 
 import {
-connectionArgs,
-connectionDefinitions,
-connectionFromArray,
-fromGlobalId,
-nodeDefinitions,
 globalIdField
 } from 'graphql-relay';
 
-//import {nodeInterface} from '../relayNode'
+import {nodeInterface } from '../nodes';
+
+import User from '../Models/User/userSchema';
 
 
 var UserType =  new GraphQLObjectType({
     name: 'User',
     description: 'A Character within tuntab ecosystem',
+    isTypeOf: (user) => {
+        return user instanceof User;},
     fields: ()=> ({
-        id: {
-            type:GraphQLID,
-            description: "unique identifier object",
-            resolve:(user)=> user._id
-        },
+
         age:{
             type: GraphQLInt,
             description: "age of the user",
@@ -89,7 +84,9 @@ var UserType =  new GraphQLObjectType({
         },
         //more to come on here later especially connections
         //TODO: not well polished
-    })
+        id: globalIdField('User', (user)=>{12345}),
+    }),
+    interfaces: [nodeInterface]
 });
 
 export default UserType;

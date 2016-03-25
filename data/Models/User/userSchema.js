@@ -45,7 +45,7 @@ let User = mongoose.model('User', userSchema) ;//potential error on babel module
 
 module.exports = User;
 
-module.exports.getUserById = (type, id)=> {
+module.exports.getUserById = (id)=> {
     return new Promise((resolve,reject)=>{
 
         User.findOne({username:id}).exec((err,res)=>{
