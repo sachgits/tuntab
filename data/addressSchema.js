@@ -3,6 +3,7 @@
  */
 
 
+
 const MONGO_CONNECTION = "mongodb://localhost/tuntab";
 const MONGO_USER = "admin";
 const MONGO_PASS = "12345";
@@ -14,6 +15,10 @@ mongoose.connect(MONGO_CONNECTION);
 var Schema = mongoose.Schema;
 var SchemaType = mongoose.SchemaType;
 
+var Schema = mongoose.Schema;
+var SchemaTypes = mongoose.SchemaType;
+
+
 var addressSchema = Schema({
 id: Schema.ObjectId,
     street: String,
@@ -21,7 +26,7 @@ id: Schema.ObjectId,
     state:String,
     country:String,
     email:String,
-    phone:String,
+    phone:String
 });
 
 export {addressSchema};

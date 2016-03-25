@@ -3,12 +3,12 @@
  */
 import {mongoose} from './dbConfig';
 import {commonSchema} from './commonTypes';
-var SchemaType = mongoose.SchemaType;
+
 var Schema = mongoose.Schema;
 
 var ShareSchema = new Schema({
     common: commonSchema,
-    item_id: SchemaType.ObjectId
+    item_id: Schema.ObjectId
 });
 
 export {ShareSchema};

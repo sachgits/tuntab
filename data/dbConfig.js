@@ -6,8 +6,15 @@ const MONGO_USER = "admin";
 const MONGO_PASS = "12345";
 
 import mongoose from 'mongoose';
+<<<<<<< Updated upstream
 
 if(!mongoose.connection)
     mongoose.connect(MONGO_CONNECTION);
+=======
+>>>>>>> Stashed changes
 
 
+<<<<<<< Updated upstream
+=======
+export {mongoose};
+>>>>>>> Stashed changes

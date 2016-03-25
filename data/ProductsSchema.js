@@ -2,6 +2,7 @@
  * Created by sachg on 2/16/2016.
  */
 
+<<<<<<< Updated upstream
 
 const MONGO_CONNECTION = "mongodb://localhost/tuntab";
 const MONGO_USER = "admin";
@@ -13,6 +14,10 @@ if(!mongoose.connection)
 
 var Schema = mongoose.Schema;
 var SchemaTypes = mongoose.SchemaType;
+=======
+var Schema = mongoose.Schema;
+//var SchemaTypes = mongoose.SchemaType;
+>>>>>>> Stashed changes
 
 var productsSchema = new Schema({
     sku: Schema.ObjectId,
