@@ -149,6 +149,7 @@ var queryType = new GraphQLObjectType({
           return results;
       }
     },
+
   }),
     // Add your own root fields here
     Users: {
@@ -157,7 +158,7 @@ var queryType = new GraphQLObjectType({
           return Users.getListOfUsers();
       }
     },
-  node: nodeField
+    node: nodeField
   });
 
 
