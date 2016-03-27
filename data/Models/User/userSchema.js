@@ -7,6 +7,11 @@
 import {productsSchema} from './../../ProductsSchema';
 import {addressSchema} from './../../addressSchema';
 import {destinationSchema} from './../../locationSchema';
+import path from 'path';
+import bcrypt from 'bcrypt';
+import fs from 'fs';
+
+var faker = require('faker');
 
 //TODO: there is now way we are going to setup connection everywhere Working on this next
 const MONGO_CONNECTION = "mongodb://localhost/tuntab";
@@ -21,8 +26,7 @@ var Schema = mongoose.Schema;
 var SchemaType = mongoose.SchemaType;
 
 var userSchema = new Schema({
-    id: {type:Schema.ObjectId,required:true,unique:true},
-    age: {type: Number, min: 15, max: 75},
+    age: {type: Number},
     username: {type:String, required: true, unique: true},
     email: {type:String, lowercase: true, required: true},
     password: {type: String, required: true},
@@ -39,7 +43,7 @@ var userSchema = new Schema({
     products: [productsSchema]
 });
 
-userSchema.set('toJSON', {getters:true});
+userSchema.set('toJSON', {getters:true,virtuals:true});
 
 let User = mongoose.model('User', userSchema) ;//potential error on babel module.exports vs export
 
@@ -48,11 +52,13 @@ module.exports = User;
 module.exports.getUserById = (id)=> {
     return new Promise((resolve,reject)=>{
 
-        User.findOne({username:id}).exec((err,res)=>{
+        User.findOne({_id:id}).exec((err,res)=>{
             if(err) {
+                console.error(err);
                 reject(err);
             }
             else {
+                console.log(res);
                 resolve(res);
             }
         });
@@ -74,3 +80,41 @@ module.exports.getListOfUsers = () => {
         });
     });
 };
+
+module.exports.createNewFakeUsers = () => {
+    var username = faker.internet.userName();
+    var photo_album = path.join(process.cwd(),'profiles', username);
+    var password = faker.internet.password();
+
+    var salt = bcrypt.genSaltSync(10);
+    var hash_pass = bcrypt.hashSync(password, salt);
+
+    var firstname = faker.name.firstName();
+    var lastname =  faker.name.lastName();
+
+    var email = faker.internet.email();
+    var gender = faker.random.boolean();
+    var time_created = faker.date.recent();
+
+    var last_login = faker.date.recent();
+    var age = faker.random.number();
+    var new_user = new User({username: username,email:email,password,hash_pass,
+        name: {firstname:firstname,lastname:lastname},timeCreated:time_created, photoAlbum:photo_album,
+    gender:gender,lastLogin:last_login,age:age});
+
+    return new Promise((resolve, reject)=> {
+        new_user.save((err, res) => {
+            if(err){
+                console.error(err);
+                reject(err)
+            }
+            else
+            {
+                console.log(res);
+                resolve(res);
+            }
+        });
+    });
+
+
+}

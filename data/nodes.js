@@ -5,6 +5,8 @@
 import User from './Models/User/userSchema'
 import UserType from './Types/User'
 
+import {idFetcher, typeResolver} from './registry';
+
 import {GraphQLObjectType} from 'graphql';
 
 import {

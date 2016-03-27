@@ -32,13 +32,12 @@ import {
 
 import mongoose from 'mongoose';
 
-import {nodeField } from './nodes';
+//import {nodeField } from './nodes';
 
 import User from './Models/User/userSchema';
 //more imports comming
 
-import UserType from './Types/User';
-
+import UserType, {nodeField} from './Types/User';
 
 //more Query imports comming soon //here
 
@@ -54,7 +53,10 @@ var queryType = new GraphQLObjectType({
       User: {
           type: UserType,
           resolve: ()=> {
-              var results = User.getUserById('Alize76');
+              //for(var i = 0; i < 1; i++)
+                  //User.createNewFakeUsers();
+
+              var results = User.getUserById('56f87b2231d93f3c08054c88');
               return results;
           }
       },

@@ -2,7 +2,6 @@ import decamelize from 'decamelize';
 import { fromGlobalId } from 'graphql-relay';
 import pluralize from 'pluralize';
 
-import getItem from '../api/getItem';
 
 const types = {};
 const endpoints = {};

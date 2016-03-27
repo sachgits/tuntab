@@ -15,13 +15,32 @@ GraphQLObjectType
 } from 'graphql'
 
 import {
-globalIdField
+globalIdField,
+nodeDefinitions,
+fromGlobalId
 } from 'graphql-relay';
 
-import {nodeInterface } from '../nodes';
 
 import User from '../Models/User/userSchema';
 
+
+var {nodeInterface, nodeField} = nodeDefinitions(
+    (globalId) => {
+        var {type, id} = fromGlobalId(globalId);
+        console.log('fromGlobalId variable globalId: ' + globalId + " id value: " + id);
+        if(type === 'User')
+            return  User.getUserById(id);
+        return 'null';
+        //TODO: more to come here items feeds, login
+    },
+    (obj) => {
+        if (obj instanceof User)
+            return UserType;
+
+        return 'null';
+        //TODO: more to come here items feeds, login
+    }
+);
 
 var UserType =  new GraphQLObjectType({
     name: 'User',
@@ -82,11 +101,17 @@ var UserType =  new GraphQLObjectType({
             description: "users profile photo folder path might use cdn later",
             resolve: (user) => user.photoAlbum
         },
+        _id: {
+            type:GraphQLString,
+            description: "user id on mongoDB",
+            resolve: (user) => user._id
+        },
         //more to come on here later especially connections
         //TODO: not well polished
-        id: globalIdField('User', (user)=>{12345}),
+        id: globalIdField('User'),
     }),
     interfaces: [nodeInterface]
 });
 
 export default UserType;
+export {nodeField}
