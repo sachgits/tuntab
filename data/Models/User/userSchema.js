@@ -4,14 +4,15 @@
 
 
 
-import {productsSchema} from './../../ProductsSchema';
-import {addressSchema} from './../../addressSchema';
+import {productsSchema} from './../Products/ProductsSchema';
+import {addressSchema} from './../Address/addressSchema';
 import {destinationSchema} from './../../locationSchema';
 import path from 'path';
 import bcrypt from 'bcrypt';
 var faker = require('faker');
 import mongoose from 'mongoose';
 
+import Product from '../Products/ProductsSchema';
 
 //TODO: there is now way we are going to setup connection everywhere Working on this next
 
@@ -34,7 +35,7 @@ var userSchema = new Schema({
     lastLogin: {type: Date, onUpdate: Date.now},
     address: [addressSchema],
     destination: [destinationSchema],
-    products: [productsSchema]
+    products: [{type:mongoose.Types.ObjectId,ref:'Products'}]
 });
 
 userSchema.set('toJSON', {getters:true,virtuals:true});
@@ -43,7 +44,7 @@ let User = mongoose.model('User', userSchema) ;//potential error on babel module
 
 module.exports = User;
 
-module.exports.getUserById = (id)=> {
+module.exports.getUserById = (id)=> { //TODO: remember to add root
     return new Promise((resolve,reject)=>{
         User.findOne({_id:id}).exec((err,res)=>{
             if(err) {
