@@ -1,7 +1,7 @@
 /**
  * Created by sachg on 2/20/2016.
  */
-import mongoose from './dbConfig'
+import mongoose from 'mongoose'
 
 var SchemaType = mongoose.SchemaType;
 var Schema = mongoose.Schema;

@@ -9,18 +9,12 @@ import {addressSchema} from './../../addressSchema';
 import {destinationSchema} from './../../locationSchema';
 import path from 'path';
 import bcrypt from 'bcrypt';
-import fs from 'fs';
-
 var faker = require('faker');
+import mongoose from 'mongoose';
+
 
 //TODO: there is now way we are going to setup connection everywhere Working on this next
-const MONGO_CONNECTION = "mongodb://localhost/tuntab";
-const MONGO_USER = "admin";
-const MONGO_PASS = "12345";
 
-import mongoose from 'mongoose';
-if(!mongoose.connection)
-    mongoose.connect(MONGO_CONNECTION);
 
 var Schema = mongoose.Schema;
 var SchemaType = mongoose.SchemaType;
@@ -51,7 +45,6 @@ module.exports = User;
 
 module.exports.getUserById = (id)=> {
     return new Promise((resolve,reject)=>{
-
         User.findOne({_id:id}).exec((err,res)=>{
             if(err) {
                 console.error(err);
