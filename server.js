@@ -4,10 +4,17 @@ import path from 'path';
 import webpack from 'webpack';
 import WebpackDevServer from 'webpack-dev-server';
 import {Schema} from './data/schema';
+import mongoose from 'mongoose';
+
+
 
 const APP_PORT = 3000;
-const GRAPHQL_PORT = 8080;
+const GRAPHQL_PORT = 9090;
+const MONGO_CONNECTION = "mongodb://localhost/tuntab";
+const MONGO_USER = "admin";
+const MONGO_PASS = "12345";
 
+let db = mongoose.connection;
 // Expose a GraphQL endpoint
 var graphQLServer = express();
 graphQLServer.use('/', graphQLHTTP({
@@ -43,4 +50,5 @@ var app = new WebpackDevServer(compiler, {
 app.use('/', express.static(path.resolve(__dirname, 'public')));
 app.listen(APP_PORT, () => {
   console.log(`App is now running on http://localhost:${APP_PORT}`);
+    mongoose.connect(MONGO_CONNECTION);
 });
