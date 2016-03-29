@@ -14,33 +14,10 @@ GraphQLString,
 GraphQLObjectType
 } from 'graphql'
 
-import {
-globalIdField,
-nodeDefinitions,
-fromGlobalId
-} from 'graphql-relay';
+import {globalIdField} from 'graphql-relay';
 
-
+import {nodeInterface} from '../nodes';
 import User from '../Models/User/userSchema';
-
-
-var {nodeInterface, nodeField} = nodeDefinitions(
-    (globalId) => {
-        var {type, id} = fromGlobalId(globalId);
-        console.log('fromGlobalId variable globalId: ' + globalId + " id value: " + id);
-        if(type === 'User')
-            return  User.getUserById(id);
-        return 'null';
-        //TODO: more to come here items feeds, login
-    },
-    (obj) => {
-        if (obj instanceof User)
-            return UserType;
-
-        return 'null';
-        //TODO: more to come here items feeds, login
-    }
-);
 
 var UserType =  new GraphQLObjectType({
     name: 'User',
@@ -114,4 +91,3 @@ var UserType =  new GraphQLObjectType({
 });
 
 export default UserType;
-export {nodeField}

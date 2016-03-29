@@ -52,7 +52,6 @@ module.exports.getUserById = (id)=> { //TODO: remember to add root
                 reject(err);
             }
             else {
-                console.log(res);
                 resolve(res);
             }
         });

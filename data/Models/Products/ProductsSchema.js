@@ -14,7 +14,7 @@ var productsSchema = new Schema({
     photoAlbum:{type:String,required:true},
     dateTime_created: {type: Date, default: Date.now},
     manufacture_details:{
-        model_number: {type:string},IME:String
+        model_number: {type:String},IME:String
     }
 });
 
