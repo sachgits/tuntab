@@ -28,6 +28,7 @@ var userSchema = new Schema({
     timeCreated: {type: Date, default: Date.now},
     gender: {type: Boolean, default: 0, comment:"defaults to 0 for MALE"},
     photoAlbum: {type:String, required: true},
+    graphQLID:String,
     name: {
         firstname: String,
         lastname: String
@@ -68,7 +69,7 @@ module.exports.updateUser = (user) => {
 
 module.exports.getListOfUsers = () => {
     return new Promise((resolve, reject) => {
-        User.find({}).exec((err,res) => {
+        User.find().exec((err,res) => {
             err ? reject(err): resolve(res);
         });
     });

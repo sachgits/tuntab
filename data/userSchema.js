@@ -4,8 +4,8 @@
 
 
 import {mongoose} from './dbConfig';
-import {productsSchema} from './ProductsSchema';
-import {addressSchema} from './addressSchema';
+import {productsSchema} from './Models/Products/ProductsSchema';
+import {addressSchema} from './Models/Address/addressSchema';
 import {destinationSchema} from './locationSchema';
 var Schema = mongoose.Schema;
 

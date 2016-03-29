@@ -18,7 +18,7 @@ var {nodeInterface, nodeField} = nodeDefinitions(
         var {type, id} = fromGlobalId(globalId);
         console.log('globalId: ' + globalId + " id value: " + id + " and type value: " + type);
         if(type === 'User')
-            return  User.getUserById("56ea7134a15af40b17d88acc");
+            return  User.getUserById(id);
         return 'null';
         //TODO: more to come here items feeds, login
     },

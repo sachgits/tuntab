@@ -39,6 +39,7 @@ import User from './Models/User/userSchema';
 
 import UserType from './Types/User';
 import {nodeField} from './nodes';
+import UsersConnection  from './rootConnection';
 
 //more Query imports comming soon //here
 
@@ -50,13 +51,13 @@ import {nodeField} from './nodes';
 var queryType = new GraphQLObjectType({
   name: 'Query',
   fields: () => ({
-
+      allUsers: UsersConnection('users',UserType),
       User: {
           type: UserType,
           resolve: ()=> {
               //for(var i = 0; i < 1; i++)
                   //User.createNewFakeUsers();
-
+              
               var results = User.getUserById('56ea7134a15af40b17d88acc');
               return results;
           }
